@@ -25,7 +25,7 @@
     <thead>
       <tr>
         <th>@sortablelink('id')</th>
-        <th>@sortablelink('StudentName')</th>
+        <th>@sortablelink('TraineeName')</th>
         <th>@sortablelink('Address')</th>
         <th></th>
       </tr>
@@ -34,7 +34,7 @@
     @foreach($trainees as $item)
       <tr>
         <td>{{$item->id}}</td>
-        <td>{{$item->StudentName}}</td>
+        <td>{{$item->TraineeName}}</td>
         <td>{{$item->Address}}</td>
         <td> <a href="{{asset('studentdetail/'.$item->id)}}">Detail</a></td>
       </tr>

@@ -28,12 +28,14 @@
     </thead>
     <tbody>
     @foreach($data as $item)
+    @if($roleID == $item->trainerID)
       <tr>
-        <td>{{$item->id}}</td>
+        <td>{{$item->trainerID}}</td>
         <td>{{$item->TrainerName}}</td>
         <td>{{$item->TopicName}}</td>
         <th>{{$item->Description}}</th>
       </tr>
+    @endif
     @endforeach
     </tbody>
   </table>

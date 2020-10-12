@@ -36,8 +36,6 @@ Route::get('addtrainer','CateController@getAddTrainer');
 Route::post('addtrainer','CateController@postAddTrainer');
 Route::get('addtrainee','CateController@getAddTrainee');
 Route::post('addtrainee','CateController@postAddTrainee');
-Route::get('addtrainee','CateController@getAddTrainee');
-Route::post('addtrainee','CateController@postAddTrainee');
 Route::get('addtopic','CateController@getaddtopic');
 Route::post('addtopic','CateController@postaddtopic');
 
@@ -46,5 +44,8 @@ Route::get('assigntutor','CateController@getassigntutor');
 Route::post('assigntutor','CateController@postassigntutor');
 Route::get('assigntrainee','CateController@getassigntrainee');
 Route::post('assigntrainee','CateController@postassigntrainee');
+Route::get('addtopictocourse','CateController@getaddtopictocourse');
+Route::post('addtopictocourse','CateController@postaddtopictocourse');
+
 
 Route::post('search','CateController@Search');

@@ -13,6 +13,7 @@ use App\trainer;
 use App\trainee;
 use App\traineecou;
 use App\trainertopic;
+use App\coursetopic;
 use App\topic;
 use Auth,DB;
 
@@ -185,38 +186,39 @@ class CateController extends Controller
 
         public function trainerinformation($id){
             $st = trainer::find($id);
-            $data = DB::table('trainers')->join('trainertopics','trainers.id','=','trainertopics.TrainerID')->join('topics','trainertopics.TopicID','=','topics.TopicId')->where('trainers.id','=',$id)->get();
+            $data = DB::table('trainers')->join('trainertopics','trainers.trainerID','=','trainertopics.TrainerID')->join('topics','trainertopics.TopicID','=','topics.TopicId')->where('trainers.trainerID','=',$id)->get();
             return view('trainerInformation',compact('data','st'));
         }
 
         public function trainerdetail($id){
-            $data = DB::table('trainers')->join('trainertopics','trainers.id','=','trainertopics.TrainerID')->join('topics','trainertopics.TopicID','=','topics.TopicId')->where('topics.TopicId','=',$id)->get();
+            $roleID = Auth::user()->id;
+            $data = DB::table('trainers')->join('trainertopics','trainers.trainerID','=','trainertopics.TrainerID')->join('topics','trainertopics.TopicID','=','topics.TopicId')->where('topics.TopicId','=',$id)->get();
             $data2 = DB::table('topics')->join('coursetopics','topics.TopicId','=','coursetopics.TopicID')->join('cources','coursetopics.CourceID','=','cources.id')->where('topics.TopicId','=',$id)->get(); // lấy ra chi tiết hóa đơn theo id
-            return view('student_detail',compact('data','data2'));
+            return view('student_detail',compact('data','data2','roleID'));
         }
 
         public function getassigntutor(){
             $topic = topic::all();
             $trainer = trainer::all();
-            return view('assigntutor',compact('topic','trainer'));
+            $course = Cource::all();
+            return view('assigntutor',compact('topic','trainer','course'));
         }
 
         public function postassigntutor(Request $request){
-            // $validatedData = $request->validate([
-            //     'TutorID' => 'required',
-            //     'CourceID' => 'required|unique:tutor_courses',
-            //     'year' => 'required'
-            // ],
-            // [
-            //     'TutorID.required' => 'Tutor name can not be empty!',
-            //     'CourceID.required' => 'Email can not be empty!',
-            //     'CourceID.unique' => 'Khoa hoc nay da co tutor',
-            //     'year.required' => 'Year can not be empty!'
-            // ]);
+            $validatedData = $request->validate([
+                'TopicID' => 'required|unique:coursetopics'
+            ],
+            [
+                'TopicID.unique' => 'This topic is already in course'
+            ]);
             $assgin = new trainertopic;
             $assgin->TrainerID = $request->id;
-            $assgin->TopicID = $request->TopicId;
+            $assgin->TopicID = $request->TopicID;
             $assgin->save();
+            $addtopic = new coursetopic;
+            $addtopic->TopicID = $request->TopicID;
+            $addtopic->CourceID = $request->CourceID;
+            $addtopic->save();
             return back();
         }
 
@@ -245,6 +247,33 @@ class CateController extends Controller
             $assgintn->save();
             return back();
         }
+
+
+        //----------------------------------------------
+        // public function getaddtopictocourse(){
+        //     $topic = topic::all();
+        //     $course = Cource::all();
+        //     return view('addtopictocourse',compact('course','topic'));
+        // }
+
+        // public function postaddtopictocourse(Request $request){
+        //     // $validatedData = $request->validate([
+        //     //     'TutorID' => 'required',
+        //     //     'CourceID' => 'required|unique:tutor_courses',
+        //     //     'year' => 'required'
+        //     // ],
+        //     // [
+        //     //     'TutorID.required' => 'Tutor name can not be empty!',
+        //     //     'CourceID.required' => 'Email can not be empty!',
+        //     //     'CourceID.unique' => 'Khoa hoc nay da co tutor',
+        //     //     'year.required' => 'Year can not be empty!'
+        //     // ]);
+        //     $addtopic = new coursetopic;
+        //     $addtopic->TopicID = $request->TopicID;
+        //     $addtopic->CourceID = $request->CourceID;
+        //     $addtopic->save();
+        //     return back();
+        // }
 
 
 

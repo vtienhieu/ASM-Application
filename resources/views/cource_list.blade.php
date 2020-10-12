@@ -39,8 +39,6 @@
         <td>{{$item->Description}}</td>
         <td>{{$item->Credit}}</td>
         <td>{{$item->TutorName}}</td>
-        
-
       </tr>
     @endforeach
     <td><a href="{{asset('trainerinformation/'.$id)}}">Detail</a></td>
