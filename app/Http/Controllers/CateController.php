@@ -163,9 +163,22 @@ class CateController extends Controller
             // $cources = $cource->sortable()->paginate(3);
             $user = Auth::user();
             if($user->can('viewinfortrainer',Categories::class)){
-                $id = Auth::user()->id;
                 $unscource = Cource::sortable()->paginate(3);
-                return view('cource_list',compact('unscource','id'));
+                return view('cource_list',compact('unscource'));
+            }
+            else{
+                dd('that bai');
+            }
+           
+        }
+        public function viewtrainer(){
+            // $cource = DB::table('cources')->join('tutor_courses','cources.id','=','tutor_courses.CourceID')->join('tutors','tutor_courses.TutorID','=','tutors.id')->paginate(3);
+            // $cources = $cource->sortable()->paginate(3);
+            $user = Auth::user();
+            if($user->can('viewinfortrainer',Categories::class)){
+        
+                $trainer = trainer::sortable()->paginate(3);
+                return view('trainerlist',compact('trainer'));
             }
             else{
                 dd('that bai');
@@ -323,6 +336,25 @@ class CateController extends Controller
             trainee::destroy($id);
             return redirect()->intended('viewtrainees');
         }
+        //-----------------------------------------------------------------
+        public function getupdatetrainer($id){
+            $trainer = trainer::find($id);
+            return view('updatetrainer',compact('trainer'));
+        }
+
+        public function postupdatetrainer($id,Request $request){
+            $trainer = trainer::find($id);
+            $trainer->TrainerName = $request->tutorname;
+            $trainer->email = $request->email;
+            $trainer->save();
+            return redirect()->intended('viewtrainer');
+        }
+
+        public function getdeletetrainer($id){
+            trainer::destroy($id);
+            return redirect()->intended('viewtrainer');
+        }
+        //----------------------------------------------
 
         public function managecategories(){
             $cate = Categories::sortable()->paginate(3);
@@ -345,6 +377,28 @@ class CateController extends Controller
         public function getdeletecate($id){
             Categories::destroy($id);
             return redirect()->intended('managecategories');
+        }
+
+//--------------------------------------------------------------------
+        public function getupdatecourse($id){
+            $course = Cource::find($id);
+            $cate = Categories::all();
+            return view('updatecourse',compact('course','cate'));
+        }
+
+        public function postupdatecourse($id,Request $request){
+            $cource = Cource::find($id);
+            $cource->name = $request->courcename;
+            $cource->Description = $request->description;
+            $cource->Credit = $request->credit;
+            $cource->CateID = $request->cate;
+            $cource->save();
+            return redirect()->intended('viewcource');
+        }
+
+        public function getdeletecourse($id){
+            Cource::destroy($id);
+            return redirect()->intended('viewcource');
         }
 
 

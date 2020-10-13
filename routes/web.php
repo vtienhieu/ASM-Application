@@ -25,6 +25,7 @@ Route::get('insert','CateController@getinsert');
 Route::post('insert','CateController@insert');
 Route::get('viewcource','CateController@viewcource');
 Route::get('viewtrainees','CateController@viewtrainees');
+Route::get('viewtrainer','CateController@viewtrainer');
 Route::get('managecategories','CateController@managecategories');
 Route::get('trainerinformation/{id}','CateController@trainerinformation');
 Route::get('trainerdetail/{id}','CateController@trainerdetail');
@@ -51,11 +52,18 @@ Route::post('addtopictocourse','CateController@postaddtopictocourse');
 
 Route::get('updatetrainee/{id}','CateController@getupdatetrainee');
 Route::post('updatetrainee/{id}','CateController@postupdatetrainee');
+Route::get('updatetrainer/{id}','CateController@getupdatetrainer');
+Route::post('updatetrainer/{id}','CateController@postupdatetrainer');
 Route::get('updatecate/{id}','CateController@getupdatecate');
 Route::post('updatecate/{id}','CateController@postupdatecate');
+Route::get('updatecourse/{id}','CateController@getupdatecourse');
+Route::post('updatecourse/{id}','CateController@postupdatecourse');
+
 
 Route::get('deletetrainee/{id}','CateController@getdeletetrainee');
+Route::get('deletetrainee/{id}','CateController@getdeletetrainer');
 Route::get('deletecate/{id}','CateController@getdeletecate');
+Route::get('deletecourse/{id}','CateController@getdeletecourse');
 
 
 

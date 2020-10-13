@@ -24,29 +24,26 @@
   <table class="table">
     <thead>
       <tr>
-        <th>@sortablelink('id')</th>
-        <th>@sortablelink('name')</th>
-        <th>@sortablelink('Description')</th>
-        <th>@sortablelink('Credit')</th>
-        <th></th>
+        <th>@sortablelink('trainerID')</th>
+        <th>@sortablelink('TrainerName')</th>
+        <th>@sortablelink('email')</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-    @foreach($unscource as $item)
+    @foreach($trainer as $item)
       <tr>
-        <td>{{$item->id}}</td>
-        <td>{{$item->name}}</td>
-        <td>{{$item->Description}}</td>
-        <td>{{$item->Credit}}</td>
-        <td>{{$item->TutorName}}</td>
-        <td> <a href="{{asset('updatecourse/'.$item->id)}}">Update</a> | <a href="{{asset('deletecourse/'.$item->id)}}">Delete</a></td>
+        <td>{{$item->trainerID}}</td>
+        <td>{{$item->TrainerName}}</td>
+        <td>{{$item->email}}</td>
+        <td> <a href="{{asset('updatetrainer/'.$item->trainerID)}}">Update</a> | <a href="{{asset('deletetrainer/'.$item->trainerID)}}">Delete</a></td>
+
       </tr>
     @endforeach
     </tbody>
   </table>
-  {{ $unscource->links() }}
 
+  {!! $trainer->appends(\Request::except('page'))->render() !!}
   </div>
 </div>
 

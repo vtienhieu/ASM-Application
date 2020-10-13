@@ -42,18 +42,25 @@ div {
 </style>
 <body>
 
-<h3>Update Categories</h3>
-<a href="{{asset('managecategories')}}" class="btn btn-info" role="button">Back</a>
-
+<h1>Add Trainer</h1>
 
 <div>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
   <form method="POST">
-    <label for="fname">Name</label>
+    <label for="fname">Trainer Name</label>
 
-    <input type="text" id="fname" name="name" placeholder="Your name.." value="{{$cate->name}}">
+    <input type="text" id="fname" name="tutorname" placeholder="Your name.." value="{{$trainer->TrainerName}}">
 
-    <label for="lname">Description</label>
-    <input type="text" id="lname" name="description" placeholder="Your last name.." value="{{$cate->description}}">
+    <label for="lname">Email</label>
+    <input type="text" id="lname" name="email" placeholder="Your Email.." value="{{$trainer->email}}">
     <input type="submit" value="Submit">
     {{csrf_field()}}
   </form>

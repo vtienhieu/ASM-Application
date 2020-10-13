@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
 <head>
-
+  <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+<html>
 <style>
 input[type=text], select {
   width: 100%;
@@ -42,18 +42,30 @@ div {
 </style>
 <body>
 
-<h3>Update Categories</h3>
-<a href="{{asset('managecategories')}}" class="btn btn-info" role="button">Back</a>
+<h3>Update Course</h3>
+
+<a href="{{asset('viewcource')}}" class="btn btn-info" role="button">Back</a>
+
 
 
 <div>
   <form method="POST">
-    <label for="fname">Name</label>
+    <label for="fname">Cource</label>
 
-    <input type="text" id="fname" name="name" placeholder="Your name.." value="{{$cate->name}}">
+    <input type="text" id="fname" name="courcename" placeholder="Cource name.." value="{{$course->name}}">
 
     <label for="lname">Description</label>
-    <input type="text" id="lname" name="description" placeholder="Your last name.." value="{{$cate->description}}">
+    <input type="text" id="lname" name="description" placeholder="Description.." value="{{$course->Description}}">
+    <label for="lname">Credit</label>
+    <input type="text" id="lname" name="credit" placeholder="Credit.." value="{{$course->Credit}}">
+    <div class="form-group">
+    <label for="exampleFormControlSelect1">Categories</label>
+    <select class="form-control" id="exampleFormControlSelect1" name="cate">
+      @foreach($cate as $ct)
+      <option value="{{$ct->id}}">{{$ct->name}}</option>
+      @endforeach
+    </select>
+  </div>
     <input type="submit" value="Submit">
     {{csrf_field()}}
   </form>
