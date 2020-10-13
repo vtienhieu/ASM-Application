@@ -199,26 +199,28 @@ class CateController extends Controller
 
         public function getassigntutor(){
             $topic = topic::all();
+            $topic2 = DB::table('trainers')->join('trainertopics','trainers.trainerID','=','trainertopics.TrainerID')->join('topics','trainertopics.TopicID','=','topics.TopicId')->get();
             $trainer = trainer::all();
-            $course = Cource::all();
-            return view('assigntutor',compact('topic','trainer','course'));
+            // $course = Cource::all();
+            return view('assigntutor',compact('topic','trainer','topic2'));
         }
 
         public function postassigntutor(Request $request){
             $validatedData = $request->validate([
-                'TopicID' => 'required|unique:coursetopics'
+                'TopicID' => 'required|unique:trainertopics'
             ],
             [
-                'TopicID.unique' => 'This topic is already in course'
+                'TopicID.unique' => 'This topic is already has trainer'
+                
             ]);
             $assgin = new trainertopic;
             $assgin->TrainerID = $request->id;
             $assgin->TopicID = $request->TopicID;
             $assgin->save();
-            $addtopic = new coursetopic;
-            $addtopic->TopicID = $request->TopicID;
-            $addtopic->CourceID = $request->CourceID;
-            $addtopic->save();
+            // $addtopic = new coursetopic;
+            // $addtopic->TopicID = $request->TopicID;
+            // $addtopic->CourceID = $request->CourceID;
+            // $addtopic->save();
             return back();
         }
 
@@ -250,30 +252,30 @@ class CateController extends Controller
 
 
         //----------------------------------------------
-        // public function getaddtopictocourse(){
-        //     $topic = topic::all();
-        //     $course = Cource::all();
-        //     return view('addtopictocourse',compact('course','topic'));
-        // }
+        public function getaddtopictocourse(){
+            $topic = DB::table('trainers')->join('trainertopics','trainers.trainerID','=','trainertopics.TrainerID')->join('topics','trainertopics.TopicID','=','topics.TopicId')->get();
+            $course = Cource::all();
+            return view('addtopictocourse',compact('course','topic'));
+        }
 
-        // public function postaddtopictocourse(Request $request){
-        //     // $validatedData = $request->validate([
-        //     //     'TutorID' => 'required',
-        //     //     'CourceID' => 'required|unique:tutor_courses',
-        //     //     'year' => 'required'
-        //     // ],
-        //     // [
-        //     //     'TutorID.required' => 'Tutor name can not be empty!',
-        //     //     'CourceID.required' => 'Email can not be empty!',
-        //     //     'CourceID.unique' => 'Khoa hoc nay da co tutor',
-        //     //     'year.required' => 'Year can not be empty!'
-        //     // ]);
-        //     $addtopic = new coursetopic;
-        //     $addtopic->TopicID = $request->TopicID;
-        //     $addtopic->CourceID = $request->CourceID;
-        //     $addtopic->save();
-        //     return back();
-        // }
+        public function postaddtopictocourse(Request $request){
+            // $validatedData = $request->validate([
+            //     'TutorID' => 'required',
+            //     'CourceID' => 'required|unique:tutor_courses',
+            //     'year' => 'required'
+            // ],
+            // [
+            //     'TutorID.required' => 'Tutor name can not be empty!',
+            //     'CourceID.required' => 'Email can not be empty!',
+            //     'CourceID.unique' => 'Khoa hoc nay da co tutor',
+            //     'year.required' => 'Year can not be empty!'
+            // ]);
+            $addtopic = new coursetopic;
+            $addtopic->TopicID = $request->TopicID;
+            $addtopic->CourceID = $request->CourceID;
+            $addtopic->save();
+            return back();
+        }
 
 
 
@@ -301,6 +303,48 @@ class CateController extends Controller
             else{
                 dd('that bai');
             }
+        }
+
+
+        public function getupdatetrainee($id){
+            $trainee = trainee::find($id);
+            return view('updatetrainee',compact('trainee'));
+        }
+
+        public function postupdatetrainee($id,Request $request){
+            $trainee = trainee::find($id);
+            $trainee->TraineeName = $request->traineeName;
+            $trainee->Address = $request->address;
+            $trainee->save();
+            return redirect()->intended('viewtrainees');
+        }
+
+        public function getdeletetrainee($id){
+            trainee::destroy($id);
+            return redirect()->intended('viewtrainees');
+        }
+
+        public function managecategories(){
+            $cate = Categories::sortable()->paginate(3);
+            return view('manageCategories',compact('cate'));
+        }
+
+        public function getupdatecate($id){
+            $cate = Categories::find($id);
+            return view('updatecate',compact('cate'));
+        }
+
+        public function postupdatecate($id,Request $request){
+            $cate = Categories::find($id);
+            $cate->name = $request->name;
+            $cate->description = $request->description;
+            $cate->save();
+            return redirect()->intended('managecategories');
+        }
+
+        public function getdeletecate($id){
+            Categories::destroy($id);
+            return redirect()->intended('managecategories');
         }
 
 

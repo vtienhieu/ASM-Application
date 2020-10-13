@@ -35,19 +35,16 @@
   <div class="form-group">
     <label for="exampleFormControlSelect1">Topic</label>
     <select class="form-control" id="exampleFormControlSelect1" name="TopicID">
+     @foreach($topic2 as $top2)
+    <option value="{{$top2->TopicId}}">{{$top2->TopicName}} ({{$top2->TrainerName}})</option>
+    @endforeach
     @foreach($topic as $top)
     <option value="{{$top->TopicId}}">{{$top->TopicName}}</option>
     @endforeach
     </select>
   </div>
-  <div class="form-group">
-    <label for="exampleFormControlSelect1">Course</label>
-    <select class="form-control" id="exampleFormControlSelect1" name="CourceID">
-    @foreach($course as $cour)
-    <option value="{{$cour->id}}">{{$cour->name}}</option>
-    @endforeach
-    </select>
-  </div>
+
+
 
  
   <div class="col-12 mb-4">
@@ -56,6 +53,8 @@
               
               {{csrf_field()}}
 </form>
+
+
   </div>
 </div>
 

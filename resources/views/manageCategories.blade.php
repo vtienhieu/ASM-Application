@@ -25,25 +25,25 @@
     <thead>
       <tr>
         <th>@sortablelink('id')</th>
-        <th>@sortablelink('TraineeName')</th>
-        <th>@sortablelink('Address')</th>
+        <th>@sortablelink('name')</th>
+        <th>@sortablelink('description')</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-    @foreach($trainees as $item)
+    @foreach($cate as $item)
       <tr>
         <td>{{$item->id}}</td>
-        <td>{{$item->TraineeName}}</td>
-        <td>{{$item->Address}}</td>
-        <td> <a href="{{asset('updatetrainee/'.$item->id)}}">Update</a> | <a href="{{asset('deletetrainee/'.$item->id)}}">Delete</a></td>
+        <td>{{$item->name}}</td>
+        <td>{{$item->description}}</td>
+        <td> <a href="{{asset('updatecate/'.$item->id)}}">Update</a> | <a href="{{asset('deletecate/'.$item->id)}}">Delete</a></td>
 
       </tr>
     @endforeach
     </tbody>
   </table>
 
-  {!! $trainees->appends(\Request::except('page'))->render() !!}
+  {!! $cate->appends(\Request::except('page'))->render() !!}
   </div>
 </div>
 
