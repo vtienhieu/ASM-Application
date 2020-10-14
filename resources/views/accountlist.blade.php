@@ -13,34 +13,36 @@
   <p>The .table-responsive class creates a responsive table which will scroll horizontally on small devices (under 768px). When viewing on anything larger than 768px wide, there is no difference:</p>       
   <!-- Search form -->
 <div class="md-form mt-0">
+  
+<a href="{{asset('register')}}" class="btn btn-success" role="button">Register new account</a>
 
-</div>
-   <h3>ID: {{$st->trainerID}}</h3>  
-   <h3>Trainer Name: {{$st->TrainerName}}</h3>                                                                               
+</div>                                                                               
   <div class="table-responsive">          
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Topic</th>
-        <th>Description</th>
+        <th>@sortablelink('id')</th>
+        <th>@sortablelink('name')</th>
+        <th>@sortablelink('roleID')</th>
+        <th>@sortablelink('email')</th>
+        <th>@sortablelink('password')</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-    @foreach($data as $item)
+    @foreach($account as $item)
       <tr>
-        <td>{{$item->trainerID}}</td>
-        <td>{{$item->TrainerName}}</td>
-        <td>{{$item->TopicName}}</td>
-        <th>{{$item->Description}}</th>
-        <th><a href="{{asset('trainerdetail/'.$item->TopicId)}}">Detail</a></th>
+        <td>{{$item->id}}</td>
+        <td>{{$item->name}}</td>
+        <td>{{$item->roleID}}</td>
+        <td>{{$item->email}}</td>
+        <td>******</td>
+        <td><a href="{{asset('updateaccount/'.$item->id)}}">Update</a> | <a href="{{asset('deleteaccount/'.$item->id)}}">Delete</a></td>
       </tr>
     @endforeach
     </tbody>
   </table>
-
+  {{ $account->links() }}
 
   </div>
 </div>

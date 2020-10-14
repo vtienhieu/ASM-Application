@@ -9,39 +9,37 @@
 <body>
 
 <div class="container">
-  <h2>Table</h2>
-  <p>The .table-responsive class creates a responsive table which will scroll horizontally on small devices (under 768px). When viewing on anything larger than 768px wide, there is no difference:</p>       
+<h2><a href="{{asset('trainingmenu')}}" >Homepage</a></h2>
   <!-- Search form -->
 <div class="md-form mt-0">
+  
+<a href="{{asset('addtopic')}}" class="btn btn-success" role="button">Add new Topic</a>
 
-</div>
-   <h3>ID: {{$st->trainerID}}</h3>  
-   <h3>Trainer Name: {{$st->TrainerName}}</h3>                                                                               
+</div>                                                                               
   <div class="table-responsive">          
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Topic</th>
-        <th>Description</th>
+        <th>@sortablelink('TopicId')</th>
+        <th>@sortablelink('TopicName')</th>
+        <th>@sortablelink('Description')</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-    @foreach($data as $item)
+    @foreach($topic as $item)
       <tr>
-        <td>{{$item->trainerID}}</td>
-        <td>{{$item->TrainerName}}</td>
+        <td>{{$item->TopicId}}</td>
         <td>{{$item->TopicName}}</td>
-        <th>{{$item->Description}}</th>
-        <th><a href="{{asset('trainerdetail/'.$item->TopicId)}}">Detail</a></th>
+        <td>{{$item->Description}}</td>
+        <td> <a href="{{asset('updatetopic/'.$item->TopicId)}}">Update</a> | <a href="{{asset('deletetopic/'.$item->TopicId)}}">Delete</a></td>
+
       </tr>
     @endforeach
     </tbody>
   </table>
 
-
+  {!! $topic->appends(\Request::except('page'))->render() !!}
   </div>
 </div>
 

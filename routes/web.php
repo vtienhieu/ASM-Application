@@ -19,14 +19,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('cate/{id}', 'CateController@Cate');
 
 Route::get('insert','CateController@getinsert');
 Route::post('insert','CateController@insert');
 Route::get('viewcource','CateController@viewcource');
 Route::get('viewtrainees','CateController@viewtrainees');
 Route::get('viewtrainer','CateController@viewtrainer');
+Route::get('viewaccount','CateController@viewaccount');
+Route::get('viewtopic','CateController@viewtopic');
 Route::get('managecategories','CateController@managecategories');
+Route::get('trainingmenu','CateController@trainingmenu');
 Route::get('trainerinformation/{id}','CateController@trainerinformation');
 Route::get('trainerdetail/{id}','CateController@trainerdetail');
 
@@ -58,15 +60,29 @@ Route::get('updatecate/{id}','CateController@getupdatecate');
 Route::post('updatecate/{id}','CateController@postupdatecate');
 Route::get('updatecourse/{id}','CateController@getupdatecourse');
 Route::post('updatecourse/{id}','CateController@postupdatecourse');
+Route::get('updateaccount/{id}','CateController@getupdateaccount');
+Route::post('updateaccount/{id}','CateController@postupdateaccount');
+Route::get('updatetopic/{id}','CateController@getupdatetopic');
+Route::post('updatetopic/{id}','CateController@postupdatetopic');
 
 
 Route::get('deletetrainee/{id}','CateController@getdeletetrainee');
-Route::get('deletetrainee/{id}','CateController@getdeletetrainer');
+Route::get('deletetrainer/{id}','CateController@getdeletetrainer');
 Route::get('deletecate/{id}','CateController@getdeletecate');
 Route::get('deletecourse/{id}','CateController@getdeletecourse');
+Route::get('deleteaccount/{id}','CateController@getdeleteaccount');
+Route::get('deletetopic/{id}','CateController@getdeletetopic');
 
 
 
 
+Route::get('searchcourse','CateController@searchcourse');
+Route::get('searchcate','CateController@searchcate');
+Route::get('searchtrainee','CateController@searchtrainee');
 
-Route::post('search','CateController@Search');
+
+Route::get('login','CateController@getLogin');
+Route::post('login','CateController@postLogin');
+Route::get('register','CateController@getregister');
+Route::post('register','CateController@postregister');
+Route::get('logout','CateController@logout');

@@ -42,7 +42,8 @@ div {
 </style>
 <body>
 
-<h1>Add Trainer</h1>
+<h1>Add Topic</h1>
+<a href="{{asset('viewtopic')}}" class="btn btn-info" role="button">Back</a>
 
 <div>
 @if ($errors->any())

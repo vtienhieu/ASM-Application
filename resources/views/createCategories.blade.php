@@ -42,16 +42,17 @@ div {
 </style>
 <body>
 
-<h3>Using CSS to style an HTML Form</h3>
+<h3>Create Categories</h3>
+<a href="{{asset('managecategories')}}" class="btn btn-info" role="button">Back</a>
 
 <div>
   <form method="POST">
-    <label for="fname">Name</label>
+    <label for="fname">Categories</label>
 
-    <input type="text" id="fname" name="name" placeholder="Your name..">
+    <input type="text" id="fname" name="name" placeholder="Categories name">
 
     <label for="lname">Description</label>
-    <input type="text" id="lname" name="description" placeholder="Your last name..">
+    <input type="text" id="lname" name="description" placeholder="Description">
     <input type="submit" value="Submit">
     {{csrf_field()}}
   </form>

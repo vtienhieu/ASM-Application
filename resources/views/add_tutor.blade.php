@@ -43,6 +43,7 @@ div {
 <body>
 
 <h1>Add Trainer</h1>
+<a href="{{asset('viewtrainer')}}" class="btn btn-info" role="button">Back</a>
 
 <div>
 @if ($errors->any())
@@ -61,6 +62,14 @@ div {
 
     <label for="lname">Email</label>
     <input type="text" id="lname" name="email" placeholder="Your Email..">
+    <select class="form-control" id="exampleFormControlSelect1" name="trainerID">
+    @foreach($u as $top)
+    @if ($top->roleID ==3){
+      <option value="{{$top->id}}">{{$top->email}}</option>
+    }
+    @endif
+    @endforeach
+    </select>
     <input type="submit" value="Submit">
     {{csrf_field()}}
   </form>

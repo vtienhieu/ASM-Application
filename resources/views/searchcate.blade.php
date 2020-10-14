@@ -14,11 +14,13 @@
   <!-- Search form -->
 <div class="md-form mt-0">
   
-  <form method="POST" action="search">
+  <form method="GET" action="searchcate">
   <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="search">
     <input type="submit" value="Submit">
     {{csrf_field()}}
   </form>
+  <a href="{{asset('managecategories')}}" class="btn btn-info" role="button">Back to categories list</a>
+
 </div>                                                                               
   <div class="table-responsive">          
   <table class="table">
@@ -26,8 +28,8 @@
       <tr>
         <th>@sortablelink('id')</th>
         <th>@sortablelink('name')</th>
-        <th>@sortablelink('Description')</th>
-        <th>@sortablelink('Credit')</th>
+        <th>@sortablelink('description')</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -35,8 +37,9 @@
       <tr>
         <td>{{$item->id}}</td>
         <td>{{$item->name}}</td>
-        <td>{{$item->Description}}</td>
-        <td>{{$item->Credit}}</td>
+        <td>{{$item->description}}</td>
+        <td> <a href="{{asset('updatecate/'.$item->id)}}">Update</a> | <a href="{{asset('deletecate/'.$item->id)}}">Delete</a></td>
+
       </tr>
     @endforeach
     </tbody>

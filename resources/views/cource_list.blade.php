@@ -9,16 +9,17 @@
 <body>
 
 <div class="container">
-  <h2>Table</h2>
-  <p>The .table-responsive class creates a responsive table which will scroll horizontally on small devices (under 768px). When viewing on anything larger than 768px wide, there is no difference:</p>       
+<h2><a href="{{asset('trainingmenu')}}" >Homepage</a></h2>
   <!-- Search form -->
 <div class="md-form mt-0">
   
-  <form method="POST" action="search">
+<form method="GET" action="searchcourse">
   <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="search">
     <input type="submit" value="Submit">
     {{csrf_field()}}
   </form>
+  <a href="{{asset('addcource')}}" class="btn btn-success" role="button">Add new Course</a>
+
 </div>                                                                               
   <div class="table-responsive">          
   <table class="table">

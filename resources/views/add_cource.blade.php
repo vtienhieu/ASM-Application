@@ -42,7 +42,8 @@ div {
 </style>
 <body>
 
-<h3>Using CSS to style an HTML Form</h3>
+<h3>Add Course</h3>
+<a href="{{asset('viewcource')}}" class="btn btn-info" role="button">Back</a>
 
 <div>
   <form method="POST">

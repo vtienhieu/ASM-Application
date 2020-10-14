@@ -30,12 +30,24 @@ class CatePolicy
      */
     public function view(User $user)
     {
-        return $user->id == 1;
+        return $user->roleID == 1;
     }
 
     public function viewinfortrainer(User $user)
     {
-        return $user->id == 1;
+        return $user->roleID == 1;
+    }
+    public function admin(User $user)
+    {
+        return $user->roleID == 1;
+    }
+    public function training(User $user)
+    {
+        return $user->roleID == 2;
+    }
+    public function trainer(User $user)
+    {
+        return $user->roleID == 3;
     }
 
     /**
@@ -46,7 +58,7 @@ class CatePolicy
      */
     public function create(User $user)
     {
-        return $user->id == 1;
+        return $user->roleID == 1;
     }
 
     /**

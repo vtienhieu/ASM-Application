@@ -13,34 +13,40 @@
   <p>The .table-responsive class creates a responsive table which will scroll horizontally on small devices (under 768px). When viewing on anything larger than 768px wide, there is no difference:</p>       
   <!-- Search form -->
 <div class="md-form mt-0">
-
-</div>
-   <h3>ID: {{$st->trainerID}}</h3>  
-   <h3>Trainer Name: {{$st->TrainerName}}</h3>                                                                               
+  
+  <form method="GET" action="searchcourse">
+  <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="search">
+    <input type="submit" value="Submit">
+    {{csrf_field()}}
+  </form>
+  <a href="{{asset('viewcource')}}" class="btn btn-info" role="button">Back to course list</a>
+</div>                                                                               
   <div class="table-responsive">          
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Topic</th>
-        <th>Description</th>
+        <th>@sortablelink('id')</th>
+        <th>@sortablelink('name')</th>
+        <th>@sortablelink('Description')</th>
+        <th>@sortablelink('Credit')</th>
+        <th></th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-    @foreach($data as $item)
+    @foreach($result as $item)
       <tr>
-        <td>{{$item->trainerID}}</td>
-        <td>{{$item->TrainerName}}</td>
-        <td>{{$item->TopicName}}</td>
-        <th>{{$item->Description}}</th>
-        <th><a href="{{asset('trainerdetail/'.$item->TopicId)}}">Detail</a></th>
+        <td>{{$item->id}}</td>
+        <td>{{$item->name}}</td>
+        <td>{{$item->Description}}</td>
+        <td>{{$item->Credit}}</td>
+        <td>{{$item->TutorName}}</td>
+        <td> <a href="{{asset('updatecourse/'.$item->id)}}">Update</a> | <a href="{{asset('deletecourse/'.$item->id)}}">Delete</a></td>
       </tr>
     @endforeach
     </tbody>
   </table>
-
+ 
 
   </div>
 </div>

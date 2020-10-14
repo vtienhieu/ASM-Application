@@ -43,7 +43,7 @@ div {
 <body>
 
 <h1>Add Trainer</h1>
-<a href="{{asset('viewtrainer')}}" class="btn btn-info" role="button">Back</a>
+<a href="{{asset('viewtopic')}}" class="btn btn-info" role="button">Back</a>
 
 <div>
 @if ($errors->any())
@@ -56,21 +56,12 @@ div {
     </div>
 @endif
   <form method="POST">
-    <label for="fname">Trainer Name</label>
+    <label for="fname">Topic Name</label>
 
-    <input type="text" id="fname" name="tutorname" placeholder="Your name.." value="{{$trainer->TrainerName}}">
+    <input type="text" id="fname" name="topicname" placeholder="Your name.." value="{{$topic->TopicName}}">
 
-    <label for="lname">Email</label>
-    <input type="text" id="lname" name="email" placeholder="Your Email.." value="{{$trainer->email}}">
-  
-    <select class="form-control" id="exampleFormControlSelect1" name="trainerID">
-    @foreach($u as $top)
-    @if ($top->roleID ==3){
-      <option value="{{$top->id}}">{{$top->email}}</option>
-    }
-    @endif
-    @endforeach
-    </select>
+    <label for="lname">Description</label>
+    <input type="text" id="lname" name="description" placeholder="Your Email.." value="{{$topic->Description}}">
     <input type="submit" value="Submit">
     {{csrf_field()}}
   </form>
