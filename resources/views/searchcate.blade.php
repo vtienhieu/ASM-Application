@@ -19,7 +19,7 @@
     <input type="submit" value="Submit">
     {{csrf_field()}}
   </form>
-  <a href="{{asset('managecategories')}}" class="btn btn-info" role="button">Back to categories list</a>
+  <a href="{{asset('asm/managecategories')}}" class="btn btn-info" role="button">Back to categories list</a>
 
 </div>                                                                               
   <div class="table-responsive">          
@@ -38,7 +38,7 @@
         <td>{{$item->id}}</td>
         <td>{{$item->name}}</td>
         <td>{{$item->description}}</td>
-        <td> <a href="{{asset('updatecate/'.$item->id)}}">Update</a> | <a href="{{asset('deletecate/'.$item->id)}}">Delete</a></td>
+        <td> <a href="{{asset('asm/updatecate/'.$item->id)}}">Update</a> | <a href="{{asset('asm/deletecate/'.$item->id)}}">Delete</a></td>
 
       </tr>
     @endforeach

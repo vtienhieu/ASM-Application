@@ -7,8 +7,10 @@ use Kyslik\ColumnSortable\Sortable;
 
 class Categories extends Model
 {
+    protected $primaryKey = 'cateID';
+
     use Sortable;
-    public $sortable = ['id',
-    'name',
+    public $sortable = ['cateID',
+    'cateName',
     'description'];
 }

@@ -9,12 +9,11 @@
 <body>
 
 <div class="container">
-  <h2>Table</h2>
-  <p>The .table-responsive class creates a responsive table which will scroll horizontally on small devices (under 768px). When viewing on anything larger than 768px wide, there is no difference:</p>       
+  <h2><a href="{{asset('asm/logout')}}" class="btn btn-success" role="button">Logout</a></h2>
   <!-- Search form -->
 <div class="md-form mt-0">
   
-<a href="{{asset('register')}}" class="btn btn-success" role="button">Register new account</a>
+<a href="{{asset('asm/register')}}" class="btn btn-primary" role="button">Register new account</a>
 
 </div>                                                                               
   <div class="table-responsive">          
@@ -37,7 +36,7 @@
         <td>{{$item->roleID}}</td>
         <td>{{$item->email}}</td>
         <td>******</td>
-        <td><a href="{{asset('updateaccount/'.$item->id)}}">Update</a> | <a href="{{asset('deleteaccount/'.$item->id)}}">Delete</a></td>
+        <td><a href="{{asset('asm/updateaccount/'.$item->id)}}">Update</a> | <a href="{{asset('asm/deleteaccount/'.$item->id)}}">Delete</a></td>
       </tr>
     @endforeach
     </tbody>

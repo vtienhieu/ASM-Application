@@ -43,14 +43,14 @@ div {
 <body>
 
 <h3>Update Categories</h3>
-<a href="{{asset('managecategories')}}" class="btn btn-info" role="button">Back</a>
+<a href="{{asset('asm/managecategories')}}" class="btn btn-info" role="button">Back</a>
 
 
 <div>
   <form method="POST">
     <label for="fname">Name</label>
 
-    <input type="text" id="fname" name="name" placeholder="Your name.." value="{{$cate->name}}">
+    <input type="text" id="fname" name="name" placeholder="Your name.." value="{{$cate->cateName}}">
 
     <label for="lname">Description</label>
     <input type="text" id="lname" name="description" placeholder="Your last name.." value="{{$cate->description}}">

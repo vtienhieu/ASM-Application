@@ -9,7 +9,7 @@
 <body>
 
 <div class="container">
-<h2><a href="{{asset('trainingmenu')}}" >Homepage</a></h2>
+<h2><a href="{{asset('asm/trainingmenu')}}" >Homepage</a></h2>
   <!-- Search form -->
 <div class="md-form mt-0">
   
@@ -18,15 +18,15 @@
     <input type="submit" value="Submit">
     {{csrf_field()}}
   </form>
-  <a href="{{asset('insert')}}" class="btn btn-success" role="button">Add new Categories</a>
+  <a href="{{asset('asm/insert')}}" class="btn btn-success" role="button">Add new Categories</a>
 
 </div>                                                                               
   <div class="table-responsive">          
   <table class="table">
     <thead>
       <tr>
-        <th>@sortablelink('id')</th>
-        <th>@sortablelink('name')</th>
+        <th>@sortablelink('cateID')</th>
+        <th>@sortablelink('cateName')</th>
         <th>@sortablelink('description')</th>
         <th></th>
       </tr>
@@ -34,10 +34,10 @@
     <tbody>
     @foreach($cate as $item)
       <tr>
-        <td>{{$item->id}}</td>
-        <td>{{$item->name}}</td>
+        <td>{{$item->cateID}}</td>
+        <td>{{$item->cateName}}</td>
         <td>{{$item->description}}</td>
-        <td> <a href="{{asset('updatecate/'.$item->id)}}">Update</a> | <a href="{{asset('deletecate/'.$item->id)}}">Delete</a></td>
+        <td> <a href="{{asset('asm/categoriesdetail/'.$item->cateID)}}">Detail</a> | <a href="{{asset('asm/updatecate/'.$item->cateID)}}">Update</a> | <a href="{{asset('asm/deletecate/'.$item->cateID)}}">Delete</a></td>
 
       </tr>
     @endforeach

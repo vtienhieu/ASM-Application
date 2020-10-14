@@ -43,7 +43,7 @@ div {
 <body>
 
 <h1>Add Trainee</h1>
-<a href="{{asset('viewtrainees')}}" class="btn btn-info" role="button">Back</a>
+<a href="{{asset('asm/viewtrainees')}}" class="btn btn-info" role="button">Back</a>
 
 <div>
 @if ($errors->any())

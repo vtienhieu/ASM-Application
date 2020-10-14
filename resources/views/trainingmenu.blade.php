@@ -72,18 +72,20 @@
                     Training
                 </div>
 <div class="dropdown">
+<a href="{{asset('asm/logout')}}" class="btn btn-success" role="button">Logout</a>
+
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Menu
   </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="btn btn-info" href="{{asset('viewcource')}}">Course management </a>
-                    <a class="btn btn-success" href="{{asset('viewtrainees')}}">Trainee management</a>
-                    <a class="btn btn-danger" href="{{asset('viewtrainer')}}">Trainer management</a>
-                    <a class="btn btn-warning" href="{{asset('managecategories')}}">Categories management</a>
-                    <a class="btn btn-danger" href="{{asset('viewtopic')}}">Topic management</a>
-                    <a class="btn btn-warning" href="{{asset('assigntutor')}}">Assign trainer</a>
-                    <a class="btn btn-primary" href="{{asset('assigntrainee')}}">Assign trainee</a>
-                    <a class="btn btn-success" href="{{asset('addtopictocourse')}}">Add topic to course</a>
+                    <a class="btn btn-info" href="{{asset('asm/viewcource')}}">Course management </a>
+                    <a class="btn btn-success" href="{{asset('asm/viewtrainees')}}">Trainee management</a>
+                    <a class="btn btn-danger" href="{{asset('asm/viewtrainer')}}">Trainer management</a>
+                    <a class="btn btn-warning" href="{{asset('asm/managecategories')}}">Categories management</a>
+                    <a class="btn btn-danger" href="{{asset('asm/viewtopic')}}">Topic management</a>
+                    <a class="btn btn-warning" href="{{asset('asm/assigntutor')}}">Assign trainer</a>
+                    <a class="btn btn-primary" href="{{asset('asm/assigntrainee')}}">Assign trainee</a>
+                    <a class="btn btn-success" href="{{asset('asm/addtopictocourse')}}">Add topic to course</a>
                 </div>
                 </div>
             </div>

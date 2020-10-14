@@ -9,11 +9,11 @@
 <body>
 
 <div class="container">
-<h2><a href="{{asset('trainingmenu')}}" >Homepage</a></h2>
+<h2><a href="{{asset('asm/trainingmenu')}}" >Homepage</a></h2>
   <!-- Search form -->
 <div class="md-form mt-0">
   
-<a href="{{asset('addtopic')}}" class="btn btn-success" role="button">Add new Topic</a>
+<a href="{{asset('asm/addtopic')}}" class="btn btn-success" role="button">Add new Topic</a>
 
 </div>                                                                               
   <div class="table-responsive">          
@@ -32,7 +32,7 @@
         <td>{{$item->TopicId}}</td>
         <td>{{$item->TopicName}}</td>
         <td>{{$item->Description}}</td>
-        <td> <a href="{{asset('updatetopic/'.$item->TopicId)}}">Update</a> | <a href="{{asset('deletetopic/'.$item->TopicId)}}">Delete</a></td>
+        <td> <a href="{{asset('asm/updatetopic/'.$item->TopicId)}}">Update</a> | <a href="{{asset('asm/deletetopic/'.$item->TopicId)}}">Delete</a></td>
 
       </tr>
     @endforeach

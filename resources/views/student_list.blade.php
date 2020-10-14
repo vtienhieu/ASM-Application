@@ -9,7 +9,7 @@
 <body>
 
 <div class="container">
-  <h2><a href="{{asset('trainingmenu')}}" >Homepage</a></h2>
+  <h2><a href="{{asset('asm/trainingmenu')}}" >Homepage</a></h2>
   <!-- Search form -->
 <div class="md-form mt-0">
 
@@ -19,7 +19,7 @@
     <input type="submit" value="Submit">
     {{csrf_field()}}
   </form>
-  <a href="{{asset('addtrainee')}}" class="btn btn-success" role="button">Add new trainees</a>
+  <a href="{{asset('asm/addtrainee')}}" class="btn btn-success" role="button">Add new trainees</a>
 
 </div>                                                                               
   <div class="table-responsive">          
@@ -38,7 +38,7 @@
         <td>{{$item->id}}</td>
         <td>{{$item->TraineeName}}</td>
         <td>{{$item->Address}}</td>
-        <td> <a href="{{asset('updatetrainee/'.$item->id)}}">Update</a> | <a href="{{asset('deletetrainee/'.$item->id)}}">Delete</a></td>
+        <td> <a href="{{asset('asm/updatetrainee/'.$item->id)}}">Update</a> | <a href="{{asset('asm/deletetrainee/'.$item->id)}}">Delete</a></td>
 
       </tr>
     @endforeach

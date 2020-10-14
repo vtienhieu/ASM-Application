@@ -73,7 +73,7 @@
 <body>
 
   <h2>Update Account</h2>
-  <a href="{{asset('viewaccount')}}" class="btn btn-info" role="button">Back</a>
+  <a href="{{asset('asm/viewaccount')}}" class="btn btn-info" role="button">Back</a>
 
   <form  method="post">
   

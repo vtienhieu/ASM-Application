@@ -19,16 +19,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['prefix'=>'asm','middleware'=>'CheckLogout'],function(){
 
 Route::get('insert','CateController@getinsert');
 Route::post('insert','CateController@insert');
 Route::get('viewcource','CateController@viewcource');
 Route::get('viewtrainees','CateController@viewtrainees');
 Route::get('viewtrainer','CateController@viewtrainer');
-Route::get('viewaccount','CateController@viewaccount');
+Route::get('viewaccount','CateController@viewaccount')->middleware('CheckLogout');
 Route::get('viewtopic','CateController@viewtopic');
 Route::get('managecategories','CateController@managecategories');
 Route::get('trainingmenu','CateController@trainingmenu');
+Route::get('categoriesdetail/{id}','CateController@categoriesdetail');
+Route::get('coursedetail/{id}','CateController@coursedetail');
 Route::get('trainerinformation/{id}','CateController@trainerinformation');
 Route::get('trainerdetail/{id}','CateController@trainerdetail');
 
@@ -81,8 +84,11 @@ Route::get('searchcate','CateController@searchcate');
 Route::get('searchtrainee','CateController@searchtrainee');
 
 
-Route::get('login','CateController@getLogin');
-Route::post('login','CateController@postLogin');
 Route::get('register','CateController@getregister');
 Route::post('register','CateController@postregister');
 Route::get('logout','CateController@logout');
+
+});
+Route::get('login','CateController@getLogin')->middleware('CheckUser');
+Route::post('login','CateController@postLogin');
+

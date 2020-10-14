@@ -19,7 +19,7 @@
     <input type="submit" value="Submit">
     {{csrf_field()}}
   </form>
-  <a href="{{asset('viewcource')}}" class="btn btn-info" role="button">Back to course list</a>
+  <a href="{{asset('asm/viewcource')}}" class="btn btn-info" role="button">Back to course list</a>
 </div>                                                                               
   <div class="table-responsive">          
   <table class="table">
@@ -41,7 +41,7 @@
         <td>{{$item->Description}}</td>
         <td>{{$item->Credit}}</td>
         <td>{{$item->TutorName}}</td>
-        <td> <a href="{{asset('updatecourse/'.$item->id)}}">Update</a> | <a href="{{asset('deletecourse/'.$item->id)}}">Delete</a></td>
+        <td> <a href="{{asset('asm/updatecourse/'.$item->id)}}">Update</a> | <a href="{{asset('asm/deletecourse/'.$item->id)}}">Delete</a></td>
       </tr>
     @endforeach
     </tbody>

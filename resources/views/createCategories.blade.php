@@ -43,7 +43,7 @@ div {
 <body>
 
 <h3>Create Categories</h3>
-<a href="{{asset('managecategories')}}" class="btn btn-info" role="button">Back</a>
+<a href="{{asset('asm/managecategories')}}" class="btn btn-info" role="button">Back</a>
 
 <div>
   <form method="POST">

@@ -43,7 +43,7 @@ div {
 <body>
 
 <h3>Add Course</h3>
-<a href="{{asset('viewcource')}}" class="btn btn-info" role="button">Back</a>
+<a href="{{asset('asm/viewcource')}}" class="btn btn-info" role="button">Back</a>
 
 <div>
   <form method="POST">
@@ -59,7 +59,7 @@ div {
     <label for="exampleFormControlSelect1">Categories</label>
     <select class="form-control" id="exampleFormControlSelect1" name="cate">
       @foreach($cate as $ct)
-      <option value="{{$ct->id}}">{{$ct->name}}</option>
+      <option value="{{$ct->cateID}}">{{$ct->cateName}}</option>
       @endforeach
     </select>
   </div>

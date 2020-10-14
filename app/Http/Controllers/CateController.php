@@ -21,10 +21,35 @@ use Auth,DB;
 
 class CateController extends Controller
 {
+    public function coursedetail($id){
+        $user = Auth::user();
+        if($user->can('training',Categories::class)){
+            $coursedetail = DB::table('cources')->join('coursetopics','cources.id','=','coursetopics.CourceID')->join('topics','coursetopics.TopicID','=','topics.TopicId')->where('cources.id','=',$id)->get();
+            return view('coursedetail',compact('coursedetail'));
+        }
+        else{
+            return view('unauthorize');
+        }
+    
+    }
+    public function categoriesdetail($id){
+        $user = Auth::user();
+        if($user->can('training',Categories::class)){
+            $detail = DB::table('cources')->join('categories','cources.CateID','=','categories.cateID')->where('categories.cateID','=',$id)->get();
+      return view('categoriesdetail',compact('detail'));
+        }
+        else{
+            return view('unauthorize');
+        }
+     
+    }
     public function trainingmenu(){
         $user = Auth::user();
         if($user->can('training',Categories::class)){
             return view('trainingmenu');
+        }
+        else{
+            return view('unauthorize');
         }
         
     }
@@ -35,7 +60,7 @@ class CateController extends Controller
             return view('createCategories');
         }
         else{
-            dd('that bai');
+            return view('unauthorize');
         }
       
     }
@@ -45,13 +70,13 @@ class CateController extends Controller
             $user = Auth::user();
             if($user->can('training',Categories::class)){
                 $categories = new Categories;
-                $categories->name = $request->name;
+                $categories->cateName = $request->name;
                 $categories->description = $request->description;
                 $categories->save();
-                return redirect()->intended('managecategories');
+                return redirect()->intended('asm/managecategories');
             }
             else{
-                dd('that bai');
+                return view('unauthorize');
             }
         }
 
@@ -62,7 +87,7 @@ class CateController extends Controller
                 return view('add_cource',compact('cate'));
             }
             else{
-                dd('that bai');
+                return view('unauthorize');
             }
           
         }
@@ -77,10 +102,10 @@ class CateController extends Controller
                 $cource->Credit = $request->credit;
                 $cource->CateID = $request->cate;
                 $cource->save();
-                return redirect()->intended('viewcource');
+                return redirect()->intended('asm/viewcource');
             }
             else{
-                dd('that bai');
+                return view('unauthorize');
             }
         }
 
@@ -91,7 +116,7 @@ class CateController extends Controller
                 return view('add_tutor',compact('u'));
             }
             else{
-                dd('that bai');
+                return view('unauthorize');
             }
           
         }
@@ -115,10 +140,10 @@ class CateController extends Controller
                 $trainer->email = $request->email;
                 $trainer->trainerID = $request->trainerID;
                 $trainer->save();
-                return redirect()->intended('viewtrainer');
+                return redirect()->intended('asm/viewtrainer');
             }
             else{
-                dd('that bai');
+                return view('unauthorize');
             }
         }
 //----------------------------------------------------------------------
@@ -130,7 +155,7 @@ class CateController extends Controller
                 return view('addtrainee');
             }
             else{
-                dd('that bai');
+                return view('unauthorize');
             }
           
         }
@@ -152,10 +177,10 @@ class CateController extends Controller
                 $trainee->TraineeName = $request->traineeName;
                 $trainee->Address = $request->address;
                 $trainee->save();
-                return redirect()->intended('viewtrainees');
+                return redirect()->intended('asm/viewtrainees');
             }
             else{
-                dd('that bai');
+                return view('unauthorize');
             }
         }
 
@@ -168,7 +193,7 @@ class CateController extends Controller
                 return view('cource_list',compact('unscource'));
             }
             else{
-                dd('that bai');
+                return view('unauthorize');
             }
            
         }
@@ -182,7 +207,7 @@ class CateController extends Controller
                 return view('topiclist',compact('topic'));
             }
             else{
-                dd('that bai');
+                return view('unauthorize');
             }
            
         }
@@ -196,7 +221,7 @@ class CateController extends Controller
                 return view('trainerlist',compact('trainer'));
             }
             else{
-                dd('that bai');
+                return view('unauthorize');
             }
            
         }
@@ -211,7 +236,7 @@ class CateController extends Controller
                 return view('accountlist',compact('account'));
             }
             else{
-                dd('that bai');
+                return view('unauthorize');
             }
            
         }
@@ -223,6 +248,9 @@ class CateController extends Controller
                 $result = Cource::where('name','like',"%$keyword%")->orWhere('Description','like',"%$keyword%")->orWhere('Credit','like',"%$keyword%")->get();
                 return view('searchcourse',compact('result'));
             }
+            else{
+                return view('unauthorize');
+            }
         
         }
 
@@ -232,6 +260,9 @@ class CateController extends Controller
         $keyword = $request->search;
         $result = Categories::where('name','like',"%$keyword%")->orWhere('description','like',"%$keyword%")->get();
         return view('searchcate',compact('result'));
+            }
+            else{
+                return view('unauthorize');
             }
        
         }
@@ -243,6 +274,9 @@ class CateController extends Controller
                 $result = trainee::where('TraineeName','like',"%$keyword%")->orWhere('Address','like',"%$keyword%")->get();
                 return view('searchtrainee',compact('result'));
             }
+            else{
+                return view('unauthorize');
+            }
       
         }
 
@@ -251,6 +285,9 @@ class CateController extends Controller
             if($user->can('training',Categories::class)){
                 $trainees = trainee::sortable()->paginate(3);
             return view('student_list',compact('trainees'));
+            }
+            else{
+                return view('unauthorize');
             }
           
         }
@@ -261,6 +298,9 @@ class CateController extends Controller
                 $st = trainer::find($id);
                 $data = DB::table('trainers')->join('trainertopics','trainers.trainerID','=','trainertopics.TrainerID')->join('topics','trainertopics.TopicID','=','topics.TopicId')->where('trainers.trainerID','=',$id)->get();
                 return view('trainerInformation',compact('data','st'));
+            }
+            else{
+                return view('unauthorize');
             }
          
         }
@@ -273,6 +313,9 @@ class CateController extends Controller
                 $data2 = DB::table('topics')->join('coursetopics','topics.TopicId','=','coursetopics.TopicID')->join('cources','coursetopics.CourceID','=','cources.id')->where('topics.TopicId','=',$id)->get(); // lấy ra chi tiết hóa đơn theo id
                 return view('student_detail',compact('data','data2','roleID'));
             }
+            else{
+                return view('unauthorize');
+            }
             
         }
 
@@ -284,6 +327,9 @@ class CateController extends Controller
                 $trainer = trainer::all();
                 // $course = Cource::all();
                 return view('assigntutor',compact('topic','trainer','topic2'));
+            }
+            else{
+                return view('unauthorize');
             }
             
            
@@ -307,7 +353,10 @@ class CateController extends Controller
                 // $addtopic->TopicID = $request->TopicID;
                 // $addtopic->CourceID = $request->CourceID;
                 // $addtopic->save();
-                return redirect()->intended('trainingmenu');
+                return redirect()->intended('asm/trainingmenu');
+            }
+            else{
+                return view('unauthorize');
             }
            
         }
@@ -319,6 +368,9 @@ class CateController extends Controller
                 $course = Cource::all();
                 $trainee = trainee::all();
                 return view('assigntrainee',compact('course','trainee'));
+            }
+            else{
+                return view('unauthorize');
             }
          
         }
@@ -341,7 +393,10 @@ class CateController extends Controller
                 $assgintn->CourceID = $request->CourceID;
                 $assgintn->TraineeID = $request->traineeID;
                 $assgintn->save();
-                return redirect()->intended('trainingmenu');
+                return redirect()->intended('asm/trainingmenu');
+            }
+            else{
+                return view('unauthorize');
             }
         
         }
@@ -354,6 +409,9 @@ class CateController extends Controller
                 $topic = DB::table('trainers')->join('trainertopics','trainers.trainerID','=','trainertopics.TrainerID')->join('topics','trainertopics.TopicID','=','topics.TopicId')->get();
             $course = Cource::all();
             return view('addtopictocourse',compact('course','topic'));
+            }
+            else{
+                return view('unauthorize');
             }
            
         }
@@ -376,7 +434,10 @@ class CateController extends Controller
                 $addtopic->TopicID = $request->TopicID;
                 $addtopic->CourceID = $request->CourceID;
                 $addtopic->save();
-                return redirect()->intended('trainingmenu');
+                return redirect()->intended('asm/trainingmenu');
+            }
+            else{
+                return view('unauthorize');
             }
        
         }
@@ -389,7 +450,7 @@ class CateController extends Controller
                 return view('addtopic');
             }
             else{
-                dd('that bai');
+                return view('unauthorize');
             }
           
         }
@@ -402,10 +463,10 @@ class CateController extends Controller
                 $topic->TopicName = $request->topicname;
                 $topic->Description = $request->description;
                 $topic->save();
-                return redirect()->intended('viewtopic');
+                return redirect()->intended('asm/viewtopic');
             }
             else{
-                dd('that bai');
+                return view('unauthorize');
             }
         }
 
@@ -416,6 +477,10 @@ class CateController extends Controller
                 $trainee = trainee::find($id);
             return view('updatetrainee',compact('trainee'));
             }
+            else{
+                return view('unauthorize');
+            }
+
             
         }
 
@@ -426,7 +491,10 @@ class CateController extends Controller
                 $trainee->TraineeName = $request->traineeName;
                 $trainee->Address = $request->address;
                 $trainee->save();
-                return redirect()->intended('viewtrainees');
+                return redirect()->intended('asm/viewtrainees');
+            }
+            else{
+                return view('unauthorize');
             }
            
         }
@@ -435,7 +503,10 @@ class CateController extends Controller
             $user = Auth::user();
             if($user->can('training',Categories::class)){
                 trainee::destroy($id);
-            return redirect()->intended('viewtrainees');
+            return redirect()->intended('asm/viewtrainees');
+            }
+            else{
+                return view('unauthorize');
             }
             
         }
@@ -445,6 +516,9 @@ class CateController extends Controller
             if($user->can('training',Categories::class)){
                 $topic = topic::find($id);
             return view('updatetopic',compact('topic'));
+            }
+            else{
+                return view('unauthorize');
             }
             
         }
@@ -456,7 +530,10 @@ class CateController extends Controller
                 $topic->TopicName = $request->topicname;
                 $topic->Description = $request->description;
                 $topic->save();
-                return redirect()->intended('viewtopic');
+                return redirect()->intended('asm/viewtopic');
+            }
+            else{
+                return view('unauthorize');
             }
            
         }
@@ -465,7 +542,10 @@ class CateController extends Controller
             $user = Auth::user();
             if($user->can('training',Categories::class)){
                 topic::destroy($id);
-            return redirect()->intended('viewtopic');
+            return redirect()->intended('asm/viewtopic');
+            }
+            else{
+                return view('unauthorize');
             }
             
         }
@@ -476,6 +556,9 @@ class CateController extends Controller
                 $trainer = trainer::find($id);
             $u = User::all();
             return view('updatetrainer',compact('trainer','u'));
+            }
+            else{
+                return view('unauthorize');
             }
             
         }
@@ -488,7 +571,10 @@ class CateController extends Controller
             $trainer->email = $request->email;
             $trainer->trainerID = $request->trainerID;
             $trainer->save();
-            return redirect()->intended('viewtrainer');
+            return redirect()->intended('asm/viewtrainer');
+            }
+            else{
+                return view('unauthorize');
             }
             
         }
@@ -497,7 +583,10 @@ class CateController extends Controller
             $user = Auth::user();
             if($user->can('training',Categories::class)){
                 trainer::destroy($id);
-                return redirect()->intended('viewtrainer');
+                return redirect()->intended('asm/viewtrainer');
+            }
+            else{
+                return view('unauthorize');
             }
             
         }
@@ -509,6 +598,9 @@ class CateController extends Controller
                 $cate = Categories::sortable()->paginate(3);
             return view('manageCategories',compact('cate'));
             }
+            else{
+                return view('unauthorize');
+            }
             
         }
 
@@ -518,6 +610,9 @@ class CateController extends Controller
                 $cate = Categories::find($id);
             return view('updatecate',compact('cate'));
             }
+            else{
+                return view('unauthorize');
+            }
             
         }
 
@@ -525,10 +620,13 @@ class CateController extends Controller
             $user = Auth::user();
             if($user->can('training',Categories::class)){
             $cate = Categories::find($id);
-            $cate->name = $request->name;
+            $cate->cateName = $request->name;
             $cate->description = $request->description;
             $cate->save();
-            return redirect()->intended('managecategories');
+            return redirect()->intended('asm/managecategories');
+            }
+            else{
+                return view('unauthorize');
             }
             
         }
@@ -537,7 +635,10 @@ class CateController extends Controller
             $user = Auth::user();
             if($user->can('training',Categories::class)){
                 Categories::destroy($id);
-                return redirect()->intended('managecategories');
+                return redirect()->intended('asm/managecategories');
+            }
+            else{
+                return view('unauthorize');
             }
             
         }
@@ -549,6 +650,9 @@ class CateController extends Controller
                 $course = Cource::find($id);
             $cate = Categories::all();
             return view('updatecourse',compact('course','cate'));
+            }
+            else{
+                return view('unauthorize');
             }
             
         }
@@ -562,7 +666,10 @@ class CateController extends Controller
             $cource->Credit = $request->credit;
             $cource->CateID = $request->cate;
             $cource->save();
-            return redirect()->intended('viewcource');
+            return redirect()->intended('asm/viewcource');
+            }
+            else{
+                return view('unauthorize');
             }
             
         }
@@ -571,7 +678,10 @@ class CateController extends Controller
             $user = Auth::user();
             if($user->can('training',Categories::class)){
                 Cource::destroy($id);
-                return redirect()->intended('viewcource');
+                return redirect()->intended('asm/viewcource');
+            }
+            else{
+                return view('unauthorize');
             }
             
         }
@@ -588,13 +698,13 @@ class CateController extends Controller
             ];
             if(Auth::attempt($login)){
                 if(Auth::user()->roleID == 3){
-                    return redirect()->intended('trainerinformation/'.Auth::user()->id);
+                    return redirect()->intended('asm/trainerinformation/'.Auth::user()->id);
                 }
                 else if(Auth::user()->roleID ==1){
-                    return redirect()->intended('viewaccount');
+                    return redirect()->intended('asm/viewaccount');
                 }
                 else if(Auth::user()->roleID ==2){
-                    return redirect()->intended('trainingmenu');
+                    return redirect()->intended('asm/trainingmenu');
                 }
                 
 
@@ -604,7 +714,7 @@ class CateController extends Controller
 
 
             }else{
-                return redirect()->intended('login');
+                return redirect()->intended('asm/login');
             }
         }
 
@@ -613,6 +723,9 @@ class CateController extends Controller
             $user = Auth::user();
             if($user->can('admin',Categories::class)){
                 return view('register');
+            }
+            else{
+                return view('unauthorize');
             }
             
         }
@@ -625,7 +738,10 @@ class CateController extends Controller
             $user->password = Hash::make($request->psw);
             $user->roleID = $request->id;
             $user->save();
-            return redirect()->intended('viewaccount');
+            return redirect()->intended('asm/viewaccount');
+            }
+            else{
+                return view('unauthorize');
             }
         
         }
@@ -635,6 +751,9 @@ class CateController extends Controller
             if($user->can('admin',Categories::class)){
                 $account = User::find($id);
                 return view('updateaccount',compact('account'));
+            }
+            else{
+                return view('unauthorize');
             }
             
         }
@@ -647,7 +766,10 @@ class CateController extends Controller
         $user->password = Hash::make($request->psw);
         $user->roleID = $request->id;
         $user->save();
-        return redirect()->intended('viewaccount');
+        return redirect()->intended('asm/viewaccount');
+            }
+            else{
+                return view('unauthorize');
             }
         
         }
@@ -656,7 +778,10 @@ class CateController extends Controller
             $user = Auth::user();
             if($user->can('admin',Categories::class)){
                 User::destroy($id);
-            return redirect()->intended('viewaccount');
+            return redirect()->intended('asm/viewaccount');
+            }
+            else{
+                return view('unauthorize');
             }
             
         }
@@ -664,7 +789,7 @@ class CateController extends Controller
         public function logout(){
 
             Auth::logout();
-            return redirect()->intended('/');
+            return redirect()->intended('login');
         }
 
 
