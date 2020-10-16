@@ -33,9 +33,12 @@ class CatePolicy
         return $user->roleID == 1;
     }
 
-    public function viewinfortrainer(User $user)
+    public function updatetrainer(User $user)
     {
-        return $user->roleID == 1;
+        if($user->roleID == 2 || $user->roleID == 3){
+            return true;
+        }
+        
     }
     public function admin(User $user)
     {

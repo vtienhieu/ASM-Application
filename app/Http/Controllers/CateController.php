@@ -294,10 +294,11 @@ class CateController extends Controller
 
         public function trainerinformation($id){
             $user = Auth::user();
+            $id = Auth::user()->id;
             if($user->can('trainer',Categories::class)){
                 $st = trainer::find($id);
                 $data = DB::table('trainers')->join('trainertopics','trainers.trainerID','=','trainertopics.TrainerID')->join('topics','trainertopics.TopicID','=','topics.TopicId')->where('trainers.trainerID','=',$id)->get();
-                return view('trainerInformation',compact('data','st'));
+                return view('trainerInformation',compact('data','st','id'));
             }
             else{
                 return view('unauthorize');
@@ -552,10 +553,12 @@ class CateController extends Controller
         //-----------------------------------------------------------------
         public function getupdatetrainer($id){
             $user = Auth::user();
-            if($user->can('training',Categories::class)){
+            $roleID = Auth::user()->roleID;
+            $id2 = Auth::user()->id;
+            if($user->can('updatetrainer',Categories::class)){
                 $trainer = trainer::find($id);
             $u = User::all();
-            return view('updatetrainer',compact('trainer','u'));
+            return view('updatetrainer',compact('trainer','u','roleID','id2'));
             }
             else{
                 return view('unauthorize');
@@ -565,18 +568,22 @@ class CateController extends Controller
 
         public function postupdatetrainer($id,Request $request){
             $user = Auth::user();
-            if($user->can('training',Categories::class)){
+            if($user->can('updatetrainer',Categories::class)){
             $trainer = trainer::find($id);
             $trainer->TrainerName = $request->tutorname;
             $trainer->email = $request->email;
             $trainer->trainerID = $request->trainerID;
             $trainer->save();
-            return redirect()->intended('asm/viewtrainer');
+            if(Auth::user()->roleID == 3){
+                return redirect()->intended('asm/trainerinformation/'.Auth::user()->id);
+            }
+            else if(Auth::user()->roleID == 2){
+                return redirect()->intended('asm/viewtrainer');
             }
             else{
                 return view('unauthorize');
             }
-            
+        }
         }
 
         public function getdeletetrainer($id){

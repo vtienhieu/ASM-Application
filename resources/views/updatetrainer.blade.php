@@ -43,8 +43,13 @@ div {
 <body>
 
 <h1>Add Trainer</h1>
-<a href="{{asset('asm/viewtrainer')}}" class="btn btn-info" role="button">Back</a>
+@if($roleID == 2)
+  <a href="{{asset('asm/viewtrainer')}}" class="btn btn-info" role="button">Back</a>
 
+@elseif($roleID == 3)
+  <a href="{{asset('asm/trainerinformation/'.$id2)}}" class="btn btn-info" role="button">Back</a>
+
+@endif
 <div>
 @if ($errors->any())
     <div class="alert alert-danger">

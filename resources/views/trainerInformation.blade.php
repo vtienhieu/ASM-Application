@@ -10,6 +10,7 @@
 
 <div class="container">
   <h2><a href="{{asset('asm/logout')}}" class="btn btn-success" role="button">Logout</a>
+  <h2><a href="{{asset('asm/updatetrainer/'.$id)}}" class="btn btn-success" role="button">Update profile</a>
 </h2>
 
 <div class="md-form mt-0">
