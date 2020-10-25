@@ -721,7 +721,7 @@ class CateController extends Controller
 
 
             }else{
-                return redirect()->intended('asm/login');
+                return redirect()->intended('login');
             }
         }
 

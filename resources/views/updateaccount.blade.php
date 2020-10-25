@@ -89,8 +89,8 @@
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required >
 
-      <label for="id"><b>ID</b></label>
-      <input type="text" placeholder="Role ID" name="id" required value="{{$account->id}}" disabled> 
+      <label for="id"><b>Role ID</b></label>
+      <input type="text" placeholder="Role ID" name="id" required value="{{$account->roleID}}" > 
 
       <button type="submit">Register</button>
     </div>
